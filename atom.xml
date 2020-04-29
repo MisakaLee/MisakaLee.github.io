@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.remielee.com/</id>
     <title>Remiel</title>
-    <updated>2020-01-31T13:42:37.914Z</updated>
+    <updated>2020-04-29T08:23:25.853Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.remielee.com/"/>
     <link rel="self" href="https://www.remielee.com/atom.xml"/>
@@ -12,8 +12,8 @@
     <rights>All rights reserved 2020, Remiel</rights>
     <entry>
         <title type="html"><![CDATA[Useful links ]]></title>
-        <id>https://www.remielee.com/post/useful-links</id>
-        <link href="https://www.remielee.com/post/useful-links">
+        <id>https://www.remielee.com/post/useful-links/</id>
+        <link href="https://www.remielee.com/post/useful-links/">
         </link>
         <updated>2020-01-03T10:52:25.000Z</updated>
         <content type="html"><![CDATA[<p><a href="https://sussed.soton.ac.uk/">1.sussed</a></p>
@@ -28,6 +28,7 @@
 <p><a href="https://sotonproduction.service-now.com/soton/it.do">10.KnowledgeBase</a></p>
 <p><a href="magi.com">11.Magi</a></p>
 <p><a href="https://www.sq688.com/">12.SQmusic</a></p>
+<p><a href="https://cn.overleaf.com/login">13.Latex</a></p>
 ]]></content>
     </entry>
 </feed>
