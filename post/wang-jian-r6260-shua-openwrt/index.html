@@ -2,24 +2,18 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Useful links  | Remiel</title>
+<title>网件R6260刷openwrt | Remiel</title>
 <link rel="shortcut icon" href="https://www.remielee.com//favicon.ico?v=1588674607469">
 <link href="https://cdn.remixicon.com/releases/v2.1.0/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.remielee.com//styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Useful links  | Remiel - Atom Feed" href="https://www.remielee.com//atom.xml">
+<link rel="alternate" type="application/atom+xml" title="网件R6260刷openwrt | Remiel - Atom Feed" href="https://www.remielee.com//atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="1.sussed
-2.secure.esc
-3.SVE
-4.FindBooks
-5.movies&amp;teleplay
-6.recordings of courses
-7.Latex table
-8.PostCode2Address
-9..." />
+    <meta name="description" content="因为查到R6260与R6850配置完全一样，并且基本查不到R6260的刷机方式。最终按照R6850来刷机。原文恩山无线
+按照帖子说法，直接下载原版即可并在路由器后台上传固件即可更新。但由于未编译因此没有开启WiFi也没有安装web页面。
+接..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -90,33 +84,66 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Useful links 
+              网件R6260刷openwrt
             </h2>
             <div class="post-info">
               <span>
-                2020-01-03
+                2020-05-05
               </span>
               <span>
-                1 min read
+                3 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p><a href="https://sussed.soton.ac.uk/">1.sussed</a></p>
-<p><a href="https://secure.ecs.soton.ac.uk/">2.secure.esc</a></p>
-<p><a href="https://vdi.soton.ac.uk/portal/webclient/index.html#/">3.SVE</a></p>
-<p><a href="https://libgen.is">4.FindBooks</a></p>
-<p><a href="https://duonaolive.com/">5.movies&amp;teleplay</a></p>
-<p><a href="https://www.panopto.com/features/integration/blackboard/">6.recordings of courses</a></p>
-<p><a href="http://www.tablesgenerator.com/#">7.Latex table</a></p>
-<p><a href="https://www.royalmail.com/find-a-postcode">8.PostCode2Address</a></p>
-<p><a href="https://paxful.com/">9.PAXFUL</a></p>
-<p><a href="https://sotonproduction.service-now.com/soton/it.do">10.KnowledgeBase</a></p>
-<p><a href="magi.com">11.Magi</a></p>
-<p><a href="https://www.sq688.com/">12.SQmusic</a></p>
-<p><a href="https://cn.overleaf.com/login">13.Latex</a></p>
+                <p>因为查到R6260与R6850配置完全一样，并且基本查不到R6260的刷机方式。最终按照R6850来刷机。<a href="https://www.right.com.cn/forum/thread-3706912-1-1.html">原文恩山无线</a><br>
+按照帖子说法，直接下载原版即可并在路由器后台上传固件即可更新。但由于未编译因此没有开启WiFi也没有安装web页面。<br>
+接下来使用网线直连路由器，并ssh连接，用户名是root，密码空或者password。<br>
+然后使用命令行安装luci web页面和中文支持</p>
+<pre><code>opkg update
+opkg install luci
+opkg install luci-i18n-base-zh-cn
+/etc/init.d/uhttpd enable
+/etc/init.d/uhttpd start
+</code></pre>
+<p>即可连接webUI是用了</p>
+<p>用作无线桥接：</p>
+<p>配置AP模式：</p>
+<p>uci set wireless.@wifi-iface[0].network=lan</p>
+<p>uci set wireless.@wifi-iface[0].mode=ap</p>
+<p>uci set wireless.@wifi-iface[0].encryption=psk2   #设置加密方式同上级路由</p>
+<p>uci set wireless.@wifi-iface[0].key=87654321     #设置密码同上级路由</p>
+<p>uci set wireless.@wifi-iface[0].ssid=openwrt_num1 #设置WIFI的名称</p>
+<p>uci set wireless.@wifi-iface[0].device=radio0    #改为自己的网卡</p>
+<p>配置station模式：</p>
+<p>uci add wireless wifi-iface</p>
+<p>uci set wireless.@wifi-iface[1].network=wwan</p>
+<p>uci set wireless.@wifi-iface[1].mode=sta</p>
+<p>uci set wireless.@wifi-iface[1].encryption=psk2   （上级路由加密方式）</p>
+<p>uci set wireless.@wifi-iface[1].ssid=ali_test       （上级路由SSID）</p>
+<p>uci set wireless.@wifi-iface[1].key=87654321     （上级路由密码）</p>
+<p>uci set wireless.@wifi-iface[1].device=radio0</p>
+<p>uci commit wireless</p>
+<p>将路由器WWAN口与LAN口进行中继桥接：</p>
+<p>uci set network.wwan=interface</p>
+<p>uci set network.wwan.proto=dhcp</p>
+<p>uci set network.lan.ipaddr=192.168.10.1</p>
+<p>uci set network.abcd=interface</p>
+<p>uci set network.abcd.proto=relay</p>
+<p>uci add_list network.abcd.network=lan</p>
+<p>uci add_list network.abcd.network=wwan</p>
+<p>uci commit network</p>
+<p>设置防火墙：</p>
+<p>uci add_list firewall.@zone[0].network='wwan'</p>
+<p>uci commit firewall</p>
+<p>关闭LAN口的dhcp功能</p>
+<p>uci delete dhcp.lan.start</p>
+<p>uci delete dhcp.lan.limit</p>
+<p>uci delete dhcp.lan.leasetime</p>
+<p>uci set dhcp.lan.ignore=1</p>
+<p>uci commit dhcp</p>
 
               </div>
               <div class="toc-container">
@@ -126,6 +153,15 @@
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://www.remielee.com/post/useful-links/">
+              <h3 class="post-title">
+                Useful links 
+              </h3>
+            </a>
+          </div>
         
 
         

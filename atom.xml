@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.remielee.com/</id>
     <title>Remiel</title>
-    <updated>2020-04-29T08:23:25.853Z</updated>
+    <updated>2020-05-05T11:01:03.321Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.remielee.com/"/>
     <link rel="self" href="https://www.remielee.com/atom.xml"/>
@@ -10,6 +10,60 @@
     <logo>https://www.remielee.com/images/avatar.png</logo>
     <icon>https://www.remielee.com/favicon.ico</icon>
     <rights>All rights reserved 2020, Remiel</rights>
+    <entry>
+        <title type="html"><![CDATA[网件R6260刷openwrt]]></title>
+        <id>https://www.remielee.com/post/wang-jian-r6260-shua-openwrt/</id>
+        <link href="https://www.remielee.com/post/wang-jian-r6260-shua-openwrt/">
+        </link>
+        <updated>2020-05-05T09:41:43.000Z</updated>
+        <content type="html"><![CDATA[<p>因为查到R6260与R6850配置完全一样，并且基本查不到R6260的刷机方式。最终按照R6850来刷机。<a href="https://www.right.com.cn/forum/thread-3706912-1-1.html">原文恩山无线</a><br>
+按照帖子说法，直接下载原版即可并在路由器后台上传固件即可更新。但由于未编译因此没有开启WiFi也没有安装web页面。<br>
+接下来使用网线直连路由器，并ssh连接，用户名是root，密码空或者password。<br>
+然后使用命令行安装luci web页面和中文支持</p>
+<pre><code>opkg update
+opkg install luci
+opkg install luci-i18n-base-zh-cn
+/etc/init.d/uhttpd enable
+/etc/init.d/uhttpd start
+</code></pre>
+<p>即可连接webUI是用了</p>
+<p>用作无线桥接：</p>
+<p>配置AP模式：</p>
+<p>uci set wireless.@wifi-iface[0].network=lan</p>
+<p>uci set wireless.@wifi-iface[0].mode=ap</p>
+<p>uci set wireless.@wifi-iface[0].encryption=psk2   #设置加密方式同上级路由</p>
+<p>uci set wireless.@wifi-iface[0].key=87654321     #设置密码同上级路由</p>
+<p>uci set wireless.@wifi-iface[0].ssid=openwrt_num1 #设置WIFI的名称</p>
+<p>uci set wireless.@wifi-iface[0].device=radio0    #改为自己的网卡</p>
+<p>配置station模式：</p>
+<p>uci add wireless wifi-iface</p>
+<p>uci set wireless.@wifi-iface[1].network=wwan</p>
+<p>uci set wireless.@wifi-iface[1].mode=sta</p>
+<p>uci set wireless.@wifi-iface[1].encryption=psk2   （上级路由加密方式）</p>
+<p>uci set wireless.@wifi-iface[1].ssid=ali_test       （上级路由SSID）</p>
+<p>uci set wireless.@wifi-iface[1].key=87654321     （上级路由密码）</p>
+<p>uci set wireless.@wifi-iface[1].device=radio0</p>
+<p>uci commit wireless</p>
+<p>将路由器WWAN口与LAN口进行中继桥接：</p>
+<p>uci set network.wwan=interface</p>
+<p>uci set network.wwan.proto=dhcp</p>
+<p>uci set network.lan.ipaddr=192.168.10.1</p>
+<p>uci set network.abcd=interface</p>
+<p>uci set network.abcd.proto=relay</p>
+<p>uci add_list network.abcd.network=lan</p>
+<p>uci add_list network.abcd.network=wwan</p>
+<p>uci commit network</p>
+<p>设置防火墙：</p>
+<p>uci add_list firewall.@zone[0].network='wwan'</p>
+<p>uci commit firewall</p>
+<p>关闭LAN口的dhcp功能</p>
+<p>uci delete dhcp.lan.start</p>
+<p>uci delete dhcp.lan.limit</p>
+<p>uci delete dhcp.lan.leasetime</p>
+<p>uci set dhcp.lan.ignore=1</p>
+<p>uci commit dhcp</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Useful links ]]></title>
         <id>https://www.remielee.com/post/useful-links/</id>
