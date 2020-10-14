@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>http://www.misakalee.github.io/</id>
+    <id>http://www.changli.tech/</id>
     <title>Remiel</title>
-    <updated>2020-10-14T08:56:05.587Z</updated>
+    <updated>2020-10-14T08:56:41.254Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="http://www.misakalee.github.io/"/>
-    <link rel="self" href="http://www.misakalee.github.io/atom.xml"/>
+    <link rel="alternate" href="http://www.changli.tech/"/>
+    <link rel="self" href="http://www.changli.tech/atom.xml"/>
     <subtitle>单纯的比比叨叨</subtitle>
-    <logo>http://www.misakalee.github.io/images/avatar.png</logo>
-    <icon>http://www.misakalee.github.io/favicon.ico</icon>
+    <logo>http://www.changli.tech/images/avatar.png</logo>
+    <icon>http://www.changli.tech/favicon.ico</icon>
     <rights>All rights reserved 2020, Remiel</rights>
     <entry>
         <title type="html"><![CDATA[网件R6260刷openwrt]]></title>
-        <id>http://www.misakalee.github.io/post/wang-jian-r6260-shua-openwrt/</id>
-        <link href="http://www.misakalee.github.io/post/wang-jian-r6260-shua-openwrt/">
+        <id>http://www.changli.tech/post/wang-jian-r6260-shua-openwrt/</id>
+        <link href="http://www.changli.tech/post/wang-jian-r6260-shua-openwrt/">
         </link>
         <updated>2020-05-05T09:41:43.000Z</updated>
         <content type="html"><![CDATA[<p>因为查到R6260与R6850配置完全一样，并且基本查不到R6260的刷机方式。最终按照R6850来刷机。<a href="https://www.right.com.cn/forum/thread-3706912-1-1.html">原文恩山无线</a><br>
@@ -66,8 +66,8 @@ opkg install luci-i18n-base-zh-cn
     </entry>
     <entry>
         <title type="html"><![CDATA[Useful links ]]></title>
-        <id>http://www.misakalee.github.io/post/useful-links/</id>
-        <link href="http://www.misakalee.github.io/post/useful-links/">
+        <id>http://www.changli.tech/post/useful-links/</id>
+        <link href="http://www.changli.tech/post/useful-links/">
         </link>
         <updated>2020-01-03T10:52:25.000Z</updated>
         <content type="html"><![CDATA[<p><a href="https://sussed.soton.ac.uk/">1.sussed</a></p>
